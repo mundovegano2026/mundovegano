@@ -2,6 +2,9 @@ FROM richarvey/nginx-php-fpm:2.0.1
 
 COPY . .
 
+# Force remove vendor so composer installs fresh for correct PHP version
+RUN rm -rf /var/www/html/vendor
+
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
