@@ -1,0 +1,18 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/brand.js": "/js/brand.js",
+    "/js/category.js": "/js/category.js",
+    "/js/chain.js": "/js/chain.js",
+    "/js/dashboard.js": "/js/dashboard.js",
+    "/js/map.js": "/js/map.js",
+    "/js/prices.js": "/js/prices.js",
+    "/js/product.js": "/js/product.js",
+    "/js/product_report.js": "/js/product_report.js",
+    "/js/review.js": "/js/review.js",
+    "/js/store.js": "/js/store.js",
+    "/js/tag.js": "/js/tag.js",
+    "/js/user.js": "/js/user.js",
+    "/js/utils.js": "/js/utils.js",
+    "/js/valuelist.js": "/js/valuelist.js"
+}

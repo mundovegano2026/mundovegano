@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
+use App\Admin;
+use App\User;
+use Session;
+
+class LoginController extends Controller
+{
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    use AuthenticatesUsers;
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:admin')->except(['logout', 'showAdminLoginForm', 'showUserLoginForm', 'adminLogin', 'userLogin']);
+    }
+
+    public function showAdminLoginForm()
+    {
+        return view('auth.login', ['url' => 'admin']);
+    }
+
+
+    public function showUserLoginForm()
+    {
+        return view('auth.user_login');
+    }
+
+    public function adminLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {   
+            $user = Admin::where('email', $request->email)->first();
+            $user->id = 1; // Fix laravel login bug
+            $teste = Auth::login($user); 
+            return redirect()->intended(route('admin.dashboard'));
+        }
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+    public function userLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {   
+            
+            $user = User::where('email', $request->email)->first();
+            $teste = Auth::login($user); 
+            return redirect('/');
+        }
+       
+        return back()->withInput($request->only('email', 'remember'));
+    }
+
+    public function logout() {       
+        Auth::logout();
+        return redirect('/');
+    }
+}

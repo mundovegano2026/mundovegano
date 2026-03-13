@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddStatusEntities extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('products', function($table) {
+            $table->integer('status_id');
+        });
+        Schema::table('stores', function($table) {
+            $table->integer('status_id');
+        });
+        Schema::table('brands', function($table) {
+            $table->integer('status_id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('products', function($table) {
+            $table->dropColumn('status_id');
+        });
+        Schema::table('stores', function($table) {
+            $table->dropColumn('status_id');
+        });
+        Schema::table('brands', function($table) {
+            $table->dropColumn('status_id');
+        });
+    }
+}
