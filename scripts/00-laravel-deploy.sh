@@ -3,6 +3,9 @@
 echo "Clearing cache..."
 rm -rf /var/www/html/bootstrap/cache/*.php
 
+echo "Running package discover..."
+php artisan package:discover --ansi
+
 echo "Building frontend..."
 npm install && npm run prod
 

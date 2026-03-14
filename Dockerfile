@@ -7,8 +7,8 @@ WORKDIR /var/www/html
 # Remove any existing vendor folder
 RUN rm -rf vendor
 
-# Install composer dependencies
-RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+# Install composer dependencies, skip post-install scripts
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
 # Fix permissions
 RUN chmod -R 775 storage bootstrap/cache
