@@ -1,2 +1,6 @@
 *
 !.gitignore
+!img/
+!img/**
+!category_images/
+!category_images/**
