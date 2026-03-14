@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         setLocale(LC_TIME, $this->app->getLocale());
-        Schema::defaultStringLength(191);
+        //Schema::defaultStringLength(191);
     }
 }
